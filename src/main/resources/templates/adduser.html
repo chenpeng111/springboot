@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>Dashboard Template for Bootstrap</title>
+		<!-- Bootstrap core CSS -->
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link th:href="@{/css/dashboard.css}" rel="stylesheet">
+		<style type="text/css">
+			/* Chart.js */
+			
+			@-webkit-keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			@keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+	<div th:replace="~{common/common::topBar}"></div>
+
+
+	<div class="container-fluid">
+			<div class="row">
+				<div th:replace="~{common/common::sideBar(active = 'list')}"></div>
+				<main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
+					<h2>添加用户</h2>
+					<form class="form-horizontal" th:action="@{user/saveUser}" method="post"  id="addUserForm">
+						<div class="form-group">
+							<label for="name" class="control-label">name</label>
+							<input type="text" class="form-control" name="name" id="name" placeholder="用户名">
+						</div>
+						<div class="form-group">
+							<label for="password" class="control-label">password</label>
+							<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+						</div>
+						<div class="form-group">
+							<label for="email" class="control-label">email</label>
+							<input type="text" class="form-control" name="email" id="email" placeholder="email">
+						</div>
+						<div class="form-group">
+							<label  class="control-label">性别</label>
+							<select class="form-control" name="sex" >
+								<option value="1">男</option>
+								<option value="0">女</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label  class="control-label">部门</label>
+							<select class="form-control"  name="departmentId" >
+								<option th:each="depart:${departments}" th:text="${depart.getDepartmentName()}" th:value="${depart.getId()}"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<button type="button" id="subitUser" class="btn btn-primary">保存</button>
+						</div>
+					</form>
+				</main>
+			</div>
+		</div>
+
+
+		<!-- Bootstrap core JavaScript
+    ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+
+
+
+	<!-- Icons -->
+		<script type="text/javascript" th:src="@{/js/feather.min.js}"></script>
+		<script>
+			feather.replace()
+		</script>
+
+		<!-- Graphs -->
+		<script type="text/javascript" th:src="@{/js/Chart.min.js}"></script>
+		<script>
+			/*不想使用 thymeleaf 的可以使用 ajax请求*/
+			/*但要注意ajax请求，不支持重定向，无法转发到list页面*/
+			$("#subitUser1").click(function(){
+				var data = formData($('#addUserForm'));
+				console.log(data)
+				$.ajax({
+					type: "get",
+					url:  "http://localhost:8080/user/saveUser",
+					dataType: "json",
+					data: data,
+					success: function(returnData) {
+						// if (returnData.code != "0000") {
+						// 	alert(returnData.msg)
+						// 	return;
+						// }else{
+						// 	alert("操作成功")
+						// }
+					}
+				});
+			})
+
+			//表单序列化 将表单内容转对象
+			function formData(form) {
+				var o = {}
+				$.each(form.serializeArray(), function(index) {
+					if (o[this['name']]) {
+						o[this['name']] = o[this['name']] + ',' + (this['value'] != null && typeof(this['value']) == 'string' ? this['value'].trim() : this['value'])
+					} else {
+						o[this['name']] = (this['value'] != null && typeof(this['value']) == 'string' ? this['value'].trim() : this['value'])
+					}
+				})
+				return o
+			}
+		</script>
+	</body>
+
+</html>

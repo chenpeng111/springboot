@@ -1,10 +1,8 @@
 package com.cpown.demo.service;
 
 import com.cpown.demo.dto.SysUserDto;
-import com.cpown.demo.mapper.DepartmentMapper;
 import com.cpown.demo.mapper.SysUserMapper;
 import com.cpown.demo.pojo.SysUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

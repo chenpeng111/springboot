@@ -82,18 +82,18 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script type="text/javascript" src="/js/jquery-3.2.1.slim.min.js" ></script>
-		<script type="text/javascript" src="/js/popper.min.js" ></script>
-		<script type="text/javascript" src="/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.slim.min.js}" ></script>
+		<script type="text/javascript" th:src="@{/js/popper.min.js}" ></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}" ></script>
 
 		<!-- Icons -->
-		<script type="text/javascript" src="/js/feather.min.js" ></script>
+		<script type="text/javascript" th:src="@{/js/feather.min.js}" ></script>
 		<script>
 			feather.replace()
 		</script>
 
 		<!-- Graphs -->
-		<script type="text/javascript" src="/js/Chart.min.js" ></script>
+		<script type="text/javascript" th:src="@{/js/Chart.min.js}" ></script>
 		<script>
 			var ctx = document.getElementById("myChart");
 			var myChart = new Chart(ctx, {

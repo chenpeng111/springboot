@@ -46,8 +46,8 @@
 				<main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
 					<h2>添加用户</h2>
 					<form class="form-horizontal" th:action="@{/user/saveUser}" method="post"  id="addUserForm">
-                        <div class="form-group">
-                            <label for="name" class="control-label">id</label>
+                        <div class="form-group" style="display: none">
+                            <label for="name" class="control-label" >id</label>
                             <input type="text" class="form-control" name="id"  th:value="${user != null ? user.getId() : ''}" id="id">
                         </div>
                         <div class="form-group">

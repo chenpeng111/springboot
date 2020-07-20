@@ -179,14 +179,6 @@ public class SysUser {
         this.departmentId = departmentId;
     }
 
-    public SysUser() {
-
-    }
-
-    public SysUser(String name, String password) {
-        this.name = name;
-        this.password = password;
-    }
 
     public String getPassword() {
         return password;

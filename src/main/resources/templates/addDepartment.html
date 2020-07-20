@@ -46,7 +46,7 @@
 				<main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
 					<h2>添加部门</h2>
 					<form class="form-horizontal"  th:action="@{/depart/saveDepartment}">
-						<div class="form-group">
+						<div class="form-group" style="display: none">
 							<label for="departmentName" class="control-label">id</label>
 							<input type="text" class="form-control" th:value="${depart != null ? depart.getId() : ''}" name="id" id="id" >
 						</div>

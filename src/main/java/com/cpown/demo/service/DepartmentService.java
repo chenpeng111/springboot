@@ -2,12 +2,9 @@ package com.cpown.demo.service;
 
 import com.cpown.demo.mapper.DepartmentMapper;
 import com.cpown.demo.pojo.Department;
-import com.cpown.demo.pojo.SysUser;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Collection;
 import java.util.List;
 
 /**

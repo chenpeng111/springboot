@@ -71,8 +71,8 @@
 									<td th:text="${user.getSex() =='0' ?'女' : '男'}"></td>
 									<td th:text="${user.getDepartmentName()}"></td>
 									<td>
-										<button class="btn btn-sm btn-primary">修改</button>
-										<button class="btn btn-sm btn-danger">删除</button>
+										<a th:href="@{/user/toUpdate(id=${user.getId()})}" class="btn btn-sm btn-primary">修改</a>
+										<a th:href="@{/user/delete(id=${user.getId()})}" class="btn btn-sm btn-danger">删除</a>
 									</td>
 								</tr>
 							</tbody>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.util.StringUtils;
@@ -53,7 +54,15 @@ public class DepartmentController {
     public ModelAndView goToAdd(){
         return new ModelAndView("addDepartment");
     }
-
+    /**
+     * 跳轉修改部门頁面
+     * @return
+     */
+    @RequestMapping("/toUpdate")
+    public String  toUpdate(@RequestParam(value = "id", defaultValue = "")String id, Model model){
+        model.addAttribute("depart",departmentService.getDepartmentById(Integer.valueOf(id)));
+        return "addDepartment";
+    }
     /**
      * 保存部门
      * @param department
@@ -62,7 +71,11 @@ public class DepartmentController {
     @RequestMapping("/saveDepartment")
     public String saveUser(Department department, Model model){
         try {
-            departmentService.insertDepartment(department);
+            if(department.getId() == null ){
+                departmentService.insertDepartment(department);
+            }else{
+                departmentService.updateDepartment(department);
+            }
         } catch (Exception e) {
             log.error(e.getMessage(),e);
             //此处可以向页面传递 错误信息
@@ -71,4 +84,16 @@ public class DepartmentController {
         return "redirect:/depart/list";
     }
 
+    /**
+     * 删除用户
+     * @return
+     */
+    @RequestMapping("/delete")
+    public String  delete(String id){
+        log.info("删除部门 departmentId={}",id);
+        if(!StringUtils.isEmpty(id)){
+            departmentService.deleteDepartment(Integer.valueOf(id));
+        }
+        return "redirect:/depart/list";
+    }
 }

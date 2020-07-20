@@ -21,8 +21,8 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         SysUser loginUser = (SysUser)request.getSession().getAttribute("loginUser");
-        System.out.println("当前登录用户：loginUser"+loginUser);
         if(null == loginUser){
+            System.out.println("没有登录：loginUser");
             request.setAttribute("msg","用户没有登录无法访问");
             //此处重定向地址  一定不能够被拦截 否则会陷入死循环
             request.getRequestDispatcher("/index.html").forward(request,response);

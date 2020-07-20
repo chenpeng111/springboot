@@ -7,7 +7,11 @@ import com.cpown.demo.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.thymeleaf.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -44,9 +48,25 @@ public class SysUserController {
      */
     @RequestMapping("/toAdd")
     public String  goToAdd(Model model){
+        log.info("跳转用户编辑界面");
         model.addAttribute("departments",departmentService.getAllDepartment());
         return "adduser";
     }
+
+    /**
+     * 跳轉修改用戶頁面
+     * @return
+     */
+    @RequestMapping("/toUpdate")
+    public String  toUpdate(@RequestParam(value = "id", defaultValue = "")String id, Model model){
+        log.info("跳转用户编辑界面");
+        model.addAttribute("departments",departmentService.getAllDepartment());
+        if(!StringUtils.isEmpty(id)){
+            model.addAttribute("user",sysUserService.getDepartmentById(Integer.valueOf(id)));
+        }
+        return "adduser";
+    }
+
 
     /**
      * 保存用戶
@@ -55,10 +75,27 @@ public class SysUserController {
      */
     @RequestMapping("/saveUser")
     public String saveUser(SysUser user){
-        log.info(user.toString());
         try {
-            sysUserService.insertUser(user);
+            if(user.getId() == null){
+                log.info("添加用户user={}",user.toString());
+                sysUserService.insertUser(user);
+            }else{
+                log.info("修改用户user={}",user.toString());
+                sysUserService.updateUser(user);
+            }
         } catch (Exception e) {
+        }
+        return "redirect:/user/list";
+    }
+    /**
+     * 删除用户
+     * @return
+     */
+    @RequestMapping("/delete")
+    public String  delete(String id){
+        log.info("删除用户 userid={}",id);
+        if(!StringUtils.isEmpty(id)){
+            sysUserService.deleteUser(Integer.valueOf(id));
         }
         return "redirect:/user/list";
     }

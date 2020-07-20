@@ -46,29 +46,33 @@
 				<main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
 					<h2>添加用户</h2>
 					<form class="form-horizontal" th:action="@{/user/saveUser}" method="post"  id="addUserForm">
-						<div class="form-group">
+                        <div class="form-group">
+                            <label for="name" class="control-label">id</label>
+                            <input type="text" class="form-control" name="id"  th:value="${user != null ? user.getId() : ''}" id="id">
+                        </div>
+                        <div class="form-group">
 							<label for="name" class="control-label">name</label>
-							<input type="text" class="form-control" name="name" id="name" placeholder="用户名">
+							<input type="text" class="form-control" name="name" th:value="${user != null ? user.getName() : ''}"  id="name" placeholder="用户名">
 						</div>
 						<div class="form-group">
 							<label for="password" class="control-label">password</label>
-							<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+							<input type="text" class="form-control" name="password" th:value="${user != null ? user.getPassword() : ''}" id="password" placeholder="Password">
 						</div>
 						<div class="form-group">
 							<label for="email" class="control-label">email</label>
-							<input type="text" class="form-control" name="email" id="email" placeholder="email">
+							<input type="text" class="form-control" name="email"  id="email" th:value="${user != null ? user.getEmail() : ''}" placeholder="email">
 						</div>
 						<div class="form-group">
 							<label  class="control-label">性别</label>
 							<select class="form-control" name="sex" >
-								<option value="1">男</option>
-								<option value="0">女</option>
+								<option th:selected="${user != null ? user.getSex() == '1' : false}"  value="1">男</option>
+								<option th:selected="${user != null ? user.getSex() == '0' : false}" value="0">女</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label  class="control-label">部门</label>
 							<select class="form-control"  name="departmentId" >
-								<option th:each="depart:${departments}" th:text="${depart.getDepartmentName()}" th:value="${depart.getId()}"></option>
+								<option  th:selected="${user != null ? user.getDepartmentId() == depart.getId() : false}" th:each="depart:${departments}" th:text="${depart.getDepartmentName()}" th:value="${depart.getId()}"></option>
 							</select>
 						</div>
 						<div class="form-group">

@@ -63,8 +63,8 @@
 									<td th:text="${department.getId()}"></td>
 									<td th:text="${department.getDepartmentName()}"></td>
 									<td>
-										<button class="btn btn-sm btn-primary">修改</button>
-										<button class="btn btn-sm btn-danger">删除</button>
+										<a th:href="@{/depart/toUpdate(id=${department.getId()})}" class="btn btn-sm btn-primary">修改</a>
+										<a th:href="@{/depart/delete(id=${department.getId()})}" class="btn btn-sm btn-danger">删除</a>
 									</td>
 								</tr>
 							</tbody>

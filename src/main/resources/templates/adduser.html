@@ -45,7 +45,7 @@
 				<div th:replace="~{common/common::sideBar(active = 'list')}"></div>
 				<main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
 					<h2>添加用户</h2>
-					<form class="form-horizontal" th:action="@{user/saveUser}" method="post"  id="addUserForm">
+					<form class="form-horizontal" th:action="@{/user/saveUser}" method="post"  id="addUserForm">
 						<div class="form-group">
 							<label for="name" class="control-label">name</label>
 							<input type="text" class="form-control" name="name" id="name" placeholder="用户名">
@@ -72,7 +72,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<button type="button" id="subitUser" class="btn btn-primary">保存</button>
+							<button type="submit" id="subitUser" class="btn btn-primary">保存</button>
 						</div>
 					</form>
 				</main>

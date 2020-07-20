@@ -6,6 +6,7 @@ import com.cpown.demo.service.DepartmentService;
 import com.cpown.demo.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用户管理controller
+ * 部门管理controller
  */
 @Controller
 @RequestMapping("/depart")
@@ -27,6 +28,12 @@ public class DepartmentController {
     @Resource
     private DepartmentService departmentService;
 
+    /**
+     * 部门列表页面
+     * 使用 ModelAndView 和 直接 retern String 都可以跳转到页面
+     * 如果使用@RestController 则必须使用 ModelAndView跳转页面
+     * @return
+     */
     @RequestMapping("/list")
     public ModelAndView goToList(){
         ModelAndView modelAndView = new ModelAndView();
@@ -39,7 +46,7 @@ public class DepartmentController {
 
 
     /**
-     * 跳轉添加用戶頁面
+     * 跳轉添加部门頁面
      * @return
      */
     @RequestMapping("/toAdd")
@@ -48,24 +55,19 @@ public class DepartmentController {
     }
 
     /**
-     * 保存用戶
+     * 保存部门
      * @param department
      * @return
      */
     @RequestMapping("/saveDepartment")
-    public String saveUser(Department department){
-        log.info(department.toString());
-        ModelAndView modelAndView = new ModelAndView();
-        Map<String,Object> resultMap = new HashMap<>();
+    public String saveUser(Department department, Model model){
         try {
             departmentService.insertDepartment(department);
-            resultMap.put("code","0000");
-            resultMap.put("msg","保存成功");
         } catch (Exception e) {
-            resultMap.put("code","9999");
-            resultMap.put("msg",e.getMessage());
+            log.error(e.getMessage(),e);
+            //此处可以向页面传递 错误信息
+            model.addAttribute("errormsg",e.getMessage());
         }
-        modelAndView.setViewName("departlist");
         return "redirect:/depart/list";
     }
 

@@ -10,17 +10,21 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * 用户Service
+ */
 @Service
 public class SysUserService {
 
-    @Autowired
-    private DepartmentService departmentService;
-    @Resource
-    DepartmentMapper departmentMapper;
     @Resource
     SysUserMapper sysUserMapper;
 
 
+    /**
+     * 根据主键查询
+     * @param id
+     * @return
+     */
     public SysUser getDepartmentById(Integer id){
         return sysUserMapper.selectByPrimaryKey(id);
     }

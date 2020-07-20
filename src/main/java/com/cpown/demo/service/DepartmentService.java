@@ -4,21 +4,20 @@ import com.cpown.demo.mapper.DepartmentMapper;
 import com.cpown.demo.pojo.Department;
 import com.cpown.demo.pojo.SysUser;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
 
-@Component
+/**
+ * 部门Service
+ */
+@Service
 public class DepartmentService {
 
     @Resource
     DepartmentMapper departmentMapper;
-
-
-    public Collection<Department> getDepartment(){
-        return departmentMapper.selectAll();
-    }
 
 
     public Department getDepartmentById(Integer id){
@@ -26,7 +25,7 @@ public class DepartmentService {
     }
 
     /**
-     * 根据用户名称查询用户
+     * 根据用户名称查询部门
      * @param name
      * @return
      */
@@ -35,7 +34,7 @@ public class DepartmentService {
     }
 
     /**
-     * 查询所有用户
+     * 查询所有用部门
      * @return
      */
     public List<Department> getAllDepartment(){
@@ -43,21 +42,21 @@ public class DepartmentService {
     }
 
     /**
-     * 插入用户
+     * 插入部门
      */
     public void insertDepartment( Department department){
         departmentMapper.insert(department);
     }
 
     /**
-     * 修改用户
+     * 修改部门
      */
     public void updateDepartment( Department department){
         departmentMapper.updateByPrimaryKey(department);
     }
 
     /**
-     * 刪除用户
+     * 刪除部门
      */
     public void deleteDepartment(Integer id){
         departmentMapper.deleteByPrimaryKey(id);

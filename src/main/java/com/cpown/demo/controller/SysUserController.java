@@ -24,6 +24,11 @@ public class SysUserController {
     @Resource
     private DepartmentService departmentService;
 
+    /**
+     * 跳转用户列表
+     * @param model
+     * @return
+     */
     @RequestMapping("/list")
     public String goToList(Model model){
         List<SysUserDto> allUser = sysUserService.getAllUser();

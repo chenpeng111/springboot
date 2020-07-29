@@ -33,7 +33,7 @@ public class DepartmentController {
     public ModelAndView goToList(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("department/departlist");
-        List<Department> allDepartment = departmentService.getAllDepartment();
+        List<Department> allDepartment = departmentService.selectAll();
         log.info("查询部门列表：数量={}",allDepartment.size());
         modelAndView.addObject("departments",allDepartment);
         return modelAndView;
@@ -54,7 +54,7 @@ public class DepartmentController {
      */
     @RequestMapping("/toUpdate")
     public String  toUpdate(@RequestParam(value = "id", defaultValue = "")String id, Model model){
-        model.addAttribute("depart",departmentService.getDepartmentById(Integer.valueOf(id)));
+        model.addAttribute("depart",departmentService.selectByPrimaryKey(Integer.valueOf(id)));
         return "department/addDepartment";
     }
     /**
@@ -66,9 +66,9 @@ public class DepartmentController {
     public String saveUser(Department department, Model model){
         try {
             if(department.getId() == null ){
-                departmentService.insertDepartment(department);
+                departmentService.insert(department);
             }else{
-                departmentService.updateDepartment(department);
+                departmentService.updateByPrimaryKey(department);
             }
         } catch (Exception e) {
             log.error(e.getMessage(),e);
@@ -86,7 +86,7 @@ public class DepartmentController {
     public String  delete(String id){
         log.info("删除部门 departmentId={}",id);
         if(!StringUtils.isEmpty(id)){
-            departmentService.deleteDepartment(Integer.valueOf(id));
+            departmentService.deleteByPrimaryKey(Integer.valueOf(id));
         }
         return "redirect:/depart/list";
     }

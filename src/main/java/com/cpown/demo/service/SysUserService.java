@@ -12,56 +12,38 @@ import java.util.List;
  * 用户Service
  */
 @Service
-public class SysUserService {
+public class SysUserService implements SysUserMapper{
 
     @Resource
     SysUserMapper sysUserMapper;
 
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return sysUserMapper.deleteByPrimaryKey(id);
+    }
 
-    /**
-     * 根据主键查询
-     * @param id
-     * @return
-     */
-    public SysUser getDepartmentById(Integer id){
+    @Override
+    public int insert(SysUser record) {
+        return sysUserMapper.insert(record);
+    }
+
+    @Override
+    public SysUser selectByPrimaryKey(Integer id) {
         return sysUserMapper.selectByPrimaryKey(id);
     }
 
-    /**
-     * 根据用户名称查询用户
-     * @param name
-     * @return
-     */
-    public List<SysUser> getSysUserByName(String name){
-        return sysUserMapper.selectSysUserByName(name);
-    }
-
-    /**
-     * 查询所有用户
-     * @return
-     */
-    public List<SysUserDto> getAllUser(){
+    @Override
+    public List<SysUserDto> selectAll() {
         return sysUserMapper.selectAll();
     }
 
-    /**
-     * 插入用户
-     */
-    public void insertUser(SysUser sysUser){
-         sysUserMapper.insert(sysUser);
+    @Override
+    public int updateByPrimaryKey(SysUser record) {
+        return sysUserMapper.updateByPrimaryKey(record);
     }
 
-    /**
-     * 修改用户
-     */
-    public void updateUser(SysUser sysUser){
-        sysUserMapper.updateByPrimaryKey(sysUser);
-    }
-
-    /**
-     * 刪除用户
-     */
-    public void deleteUser(Integer id){
-        sysUserMapper.deleteByPrimaryKey(id);
+    @Override
+    public List<SysUser> selectSysUserByName(String name) {
+        return sysUserMapper.selectSysUserByName(name);
     }
 }

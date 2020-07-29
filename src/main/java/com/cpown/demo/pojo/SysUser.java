@@ -197,6 +197,7 @@ public class SysUser {
                 ", email='" + email + '\'' +
                 ", sex=" + sex +
                 ", departmentId=" + departmentId +
+                ", roleId=" + roleId +
                 '}';
     }
 }

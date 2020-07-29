@@ -63,7 +63,7 @@
 								<tr th:each="perm:${perms}">
 									<td th:text="${perm.getId()}"></td>
 									<td th:text="${perm.getPermissionname()}"></td>
-									<td th:text="${perm.getRoleId()}"></td>
+									<td th:text="${perm.getRolename()}"></td>
 									<td>
 										<a th:href="@{/perm/toUpdate(id=${perm.getId()})}" class="btn btn-sm btn-primary">修改</a>
 										<a th:href="@{/perm/delete(id=${perm.getId()})}" class="btn btn-sm btn-danger">删除</a>

@@ -76,6 +76,12 @@
 							</select>
 						</div>
 						<div class="form-group">
+							<label  class="control-label">角色</label>
+							<select class="form-control"  name="roleId" >
+								<option  th:selected="${user != null ? user.getRoleId() == role.getId() : false}" th:each="role:${roles}" th:text="${role.getRolename()}" th:value="${role.getId()}"></option>
+							</select>
+						</div>
+						<div class="form-group">
 							<button type="submit" id="subitUser" class="btn btn-primary">保存</button>
 						</div>
 					</form>

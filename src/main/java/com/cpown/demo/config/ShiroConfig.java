@@ -45,14 +45,24 @@ public class ShiroConfig {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setSecurityManager(securityManager);
         Map<String, String> map = new LinkedHashMap<>();
-        //anon标识可以直接放行
+        //anon标识可以直接放行 首页登录index直接放行
         map.put("/index","anon");
-//        //authc标识需要认证
-//        map.put("user/**", "authc");
-//        map.put("department/**", "authc");
+        map.put("/sys/toLogin","anon");
+        /**
+         *  shiro内置过滤器
+         *  anon  无需认证可以访问
+         *  authc  必须认证才能访问
+         *  user  必须拥有  记住我 功能 才可以用
+         *  perms 拥有对某个资源的权限才能访问
+         *  role 拥有某个角色才能访问
+         */
+        map.put("user/**", "authc");
+        map.put("department/**", "authc");
+        map.put("role/**", "authc");
+        map.put("perm/**", "authc");
 
         bean.setFilterChainDefinitionMap(map);
-        bean.setLoginUrl("/sys/login");
+        bean.setLoginUrl("/sys/toLogin");
         return bean;
     }
 

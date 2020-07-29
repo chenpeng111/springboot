@@ -4,6 +4,7 @@ import com.cpown.demo.dto.SysUserDto;
 import com.cpown.demo.pojo.SysUser;
 import com.cpown.demo.service.DepartmentService;
 import com.cpown.demo.service.SysUserService;
+import com.cpown.demo.service.TRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,8 @@ public class SysUserController {
     private SysUserService sysUserService;
     @Resource
     private DepartmentService departmentService;
+    @Resource
+    private TRoleService roleService;
 
     /**
      * 跳转用户列表
@@ -33,7 +36,7 @@ public class SysUserController {
      */
     @RequestMapping("/list")
     public String goToList(Model model){
-        List<SysUserDto> allUser = sysUserService.getAllUser();
+        List<SysUserDto> allUser = sysUserService.selectAll();
         log.info("查询用户列表：数量={}",allUser.size());
         model.addAttribute("users",allUser);
         return "user/list";
@@ -47,7 +50,8 @@ public class SysUserController {
     @RequestMapping("/toAdd")
     public String  goToAdd(Model model){
         log.info("跳转用户编辑界面");
-        model.addAttribute("departments",departmentService.getAllDepartment());
+        model.addAttribute("departments",departmentService.selectAll());
+        model.addAttribute("roles",roleService.selectAll());
         return "user/adduser";
     }
 
@@ -58,9 +62,10 @@ public class SysUserController {
     @RequestMapping("/toUpdate")
     public String  toUpdate(@RequestParam(value = "id", defaultValue = "")String id, Model model){
         log.info("跳转用户编辑界面");
-        model.addAttribute("departments",departmentService.getAllDepartment());
+        model.addAttribute("departments",departmentService.selectAll());
+        model.addAttribute("roles",roleService.selectAll());
         if(!StringUtils.isEmpty(id)){
-            model.addAttribute("user",sysUserService.getDepartmentById(Integer.valueOf(id)));
+            model.addAttribute("user",sysUserService.selectByPrimaryKey(Integer.valueOf(id)));
         }
         return "user/adduser";
     }
@@ -76,10 +81,10 @@ public class SysUserController {
         try {
             if(user.getId() == null){
                 log.info("添加用户user={}",user.toString());
-                sysUserService.insertUser(user);
+                sysUserService.insert(user);
             }else{
                 log.info("修改用户user={}",user.toString());
-                sysUserService.updateUser(user);
+                sysUserService.updateByPrimaryKey(user);
             }
         } catch (Exception e) {
         }
@@ -93,7 +98,7 @@ public class SysUserController {
     public String  delete(String id){
         log.info("删除用户 userid={}",id);
         if(!StringUtils.isEmpty(id)){
-            sysUserService.deleteUser(Integer.valueOf(id));
+            sysUserService.deleteByPrimaryKey(Integer.valueOf(id));
         }
         return "redirect:/user/list";
     }

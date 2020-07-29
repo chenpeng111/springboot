@@ -1,5 +1,6 @@
 package com.cpown.demo.service;
 
+import com.cpown.demo.dto.TPermissionDto;
 import com.cpown.demo.mapper.TPermissionMapper;
 import com.cpown.demo.pojo.TPermission;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,10 @@ public class TPermissionService implements TPermissionMapper {
     @Override
     public int updateByPrimaryKey(TPermission record) {
         return mapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<TPermissionDto> selectAllDto() {
+        return mapper.selectAllDto();
     }
 }

@@ -1,5 +1,6 @@
 package com.cpown.demo.controller;
 
+import com.cpown.demo.dto.TPermissionDto;
 import com.cpown.demo.pojo.TPermission;
 import com.cpown.demo.pojo.TRole;
 import com.cpown.demo.service.TPermissionService;
@@ -32,7 +33,7 @@ public class PermController {
      */
     @RequestMapping("/list")
     public String goToList(Model model){
-        List<TPermission> allDepartment = permissionService.selectAll();
+        List<TPermissionDto> allDepartment = permissionService.selectAllDto();
         model.addAttribute("perms",allDepartment);
         return "perm/permlist";
     }
@@ -53,6 +54,7 @@ public class PermController {
      */
     @RequestMapping("/toUpdate")
     public String  toUpdate(@RequestParam(value = "id", defaultValue = "")String id, Model model){
+        model.addAttribute("roles",tRoleService.selectAll());
         model.addAttribute("perm",permissionService.selectByPrimaryKey(Integer.valueOf(id)));
         return "perm/addPerm";
     }

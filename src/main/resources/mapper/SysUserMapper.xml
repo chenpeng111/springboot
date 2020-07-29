@@ -20,10 +20,10 @@
   </delete>
   <insert id="insert" parameterType="com.cpown.demo.pojo.SysUser">
     insert into sys_user (id, name,password, email,
-      sex, department_id
+      sex, department_id,role_id
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
-      #{sex,jdbcType=TINYINT}, #{departmentId,jdbcType=INTEGER}
+      #{sex,jdbcType=TINYINT}, #{departmentId,jdbcType=INTEGER}, #{role_id,jdbcType=INTEGER}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.cpown.demo.pojo.SysUser">
@@ -31,21 +31,24 @@
     set name = #{name,jdbcType=VARCHAR}, password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=TINYINT},
-      department_id = #{departmentId,jdbcType=INTEGER}
+      department_id = #{departmentId,jdbcType=INTEGER},
+      role_id =  #{roleId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, name,password, email, sex, department_id
+    select id, name,password, email, sex, department_id,role_id
     from sys_user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="UserResultMap">
-    select sysuser.id, sysuser.name,sysuser.password, sysuser.email, sysuser.sex, sysuser.department_id,dep.department_name
+    select sysuser.id, sysuser.name,sysuser.password, sysuser.email, sysuser.sex, sysuser.department_id,
+    dep.department_name,role.rolename
     from sys_user sysuser left join department dep on dep.id = sysuser.department_id
+    left join t_role role on role.id = sysuser.role_id
   </select>
 
   <select id="selectSysUserByName" resultMap="BaseResultMap">
-    select sysuser.id, sysuser.name,sysuser.password, sysuser.email, sysuser.sex, sysuser.department_id
+    select sysuser.id, sysuser.name,sysuser.password, sysuser.email, sysuser.sex, sysuser.department_id,sysuser.role_id
     from sys_user sysuser  where sysuser.name = #{name}
   </select>
 

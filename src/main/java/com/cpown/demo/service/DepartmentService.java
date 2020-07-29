@@ -11,51 +11,39 @@ import java.util.List;
  * 部门Service
  */
 @Service
-public class DepartmentService {
+public class DepartmentService implements DepartmentMapper{
 
     @Resource
     DepartmentMapper departmentMapper;
 
 
-    public Department getDepartmentById(Integer id){
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return departmentMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int insert(Department record) {
+        return departmentMapper.insert(record);
+    }
+
+    @Override
+    public Department selectByPrimaryKey(Integer id) {
         return departmentMapper.selectByPrimaryKey(id);
     }
 
-    /**
-     * 根据用户名称查询部门
-     * @param name
-     * @return
-     */
-    public List<Department> getDepartmentByName(String name){
-        return departmentMapper.selectDepartmentByName(name);
-    }
-
-    /**
-     * 查询所有用部门
-     * @return
-     */
-    public List<Department> getAllDepartment(){
+    @Override
+    public List<Department> selectAll() {
         return departmentMapper.selectAll();
     }
 
-    /**
-     * 插入部门
-     */
-    public void insertDepartment( Department department){
-        departmentMapper.insert(department);
+    @Override
+    public int updateByPrimaryKey(Department record) {
+        return departmentMapper.updateByPrimaryKey(record);
     }
 
-    /**
-     * 修改部门
-     */
-    public void updateDepartment( Department department){
-        departmentMapper.updateByPrimaryKey(department);
-    }
-
-    /**
-     * 刪除部门
-     */
-    public void deleteDepartment(Integer id){
-        departmentMapper.deleteByPrimaryKey(id);
+    @Override
+    public List<Department> selectDepartmentByName(String name) {
+        return null;
     }
 }

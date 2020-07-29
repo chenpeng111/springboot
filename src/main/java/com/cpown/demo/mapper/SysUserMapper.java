@@ -48,5 +48,5 @@ public interface SysUserMapper {
      */
     int updateByPrimaryKey(SysUser record);
 
-    List<SysUser> selectSysUserByName(@Param("name")String name);
+    SysUser selectSysUserByName(@Param("name")String name);
 }

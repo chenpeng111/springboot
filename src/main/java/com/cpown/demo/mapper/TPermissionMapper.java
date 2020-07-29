@@ -18,4 +18,7 @@ public interface TPermissionMapper {
 
     List<TPermissionDto> selectAllDto();
 
+    List<TPermission> selectByRoleId(Integer roleId);
+
+
 }

@@ -188,6 +188,15 @@ public class SysUser {
         this.password = password;
     }
 
+    public SysUser() {
+
+    }
+
+    public SysUser(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "SysUser{" +

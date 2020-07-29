@@ -43,7 +43,7 @@ public class SysUserService implements SysUserMapper{
     }
 
     @Override
-    public List<SysUser> selectSysUserByName(String name) {
+    public SysUser selectSysUserByName(String name) {
         return sysUserMapper.selectSysUserByName(name);
     }
 }

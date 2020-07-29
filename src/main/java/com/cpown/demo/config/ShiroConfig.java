@@ -60,6 +60,10 @@ public class ShiroConfig {
         map.put("department/**", "authc");
         map.put("role/**", "authc");
         map.put("perm/**", "authc");
+        // “/role/**” 开头的用户需要角色认证，是“管理”才允许
+        map.put("/role/**", "roles[管理员]");
+        // “/perm/**” 开头的用户需要权限认证，是create才允许
+        map.put("/perm/**", "perms[create]");
 
         bean.setFilterChainDefinitionMap(map);
         bean.setLoginUrl("/sys/toLogin");

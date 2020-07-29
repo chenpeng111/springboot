@@ -1,5 +1,6 @@
 package com.cpown.demo.controller;
 
+import com.cpown.demo.pojo.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -29,6 +30,7 @@ public class LoginController {
         //将当前 登录用户 放进Subject
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
+            subject.getSession().setAttribute("user",new SysUser(username,password));
             subject.login(token);
         } catch (UnknownAccountException e) {//用户不存在
             model.addAttribute("msg","账号不存在");

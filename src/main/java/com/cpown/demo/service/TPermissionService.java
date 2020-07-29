@@ -47,4 +47,11 @@ public class TPermissionService implements TPermissionMapper {
     public List<TPermissionDto> selectAllDto() {
         return mapper.selectAllDto();
     }
+
+    @Override
+    public List<TPermission> selectByRoleId(Integer roleId) {
+        return mapper.selectByRoleId(roleId);
+    }
+
+
 }

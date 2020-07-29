@@ -1,23 +1,17 @@
 package com.cpown.demo.controller;
 
 import com.cpown.demo.pojo.Department;
-import com.cpown.demo.pojo.SysUser;
 import com.cpown.demo.service.DepartmentService;
-import com.cpown.demo.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 部门管理controller
@@ -38,7 +32,7 @@ public class DepartmentController {
     @RequestMapping("/list")
     public ModelAndView goToList(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("departlist");
+        modelAndView.setViewName("department/departlist");
         List<Department> allDepartment = departmentService.getAllDepartment();
         log.info("查询部门列表：数量={}",allDepartment.size());
         modelAndView.addObject("departments",allDepartment);
@@ -52,7 +46,7 @@ public class DepartmentController {
      */
     @RequestMapping("/toAdd")
     public ModelAndView goToAdd(){
-        return new ModelAndView("addDepartment");
+        return new ModelAndView("department/addDepartment");
     }
     /**
      * 跳轉修改部门頁面
@@ -61,7 +55,7 @@ public class DepartmentController {
     @RequestMapping("/toUpdate")
     public String  toUpdate(@RequestParam(value = "id", defaultValue = "")String id, Model model){
         model.addAttribute("depart",departmentService.getDepartmentById(Integer.valueOf(id)));
-        return "addDepartment";
+        return "department/addDepartment";
     }
     /**
      * 保存部门

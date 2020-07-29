@@ -7,10 +7,8 @@ import com.cpown.demo.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -38,7 +36,7 @@ public class SysUserController {
         List<SysUserDto> allUser = sysUserService.getAllUser();
         log.info("查询用户列表：数量={}",allUser.size());
         model.addAttribute("users",allUser);
-        return "list";
+        return "user/list";
     }
 
 
@@ -50,7 +48,7 @@ public class SysUserController {
     public String  goToAdd(Model model){
         log.info("跳转用户编辑界面");
         model.addAttribute("departments",departmentService.getAllDepartment());
-        return "adduser";
+        return "user/adduser";
     }
 
     /**
@@ -64,7 +62,7 @@ public class SysUserController {
         if(!StringUtils.isEmpty(id)){
             model.addAttribute("user",sysUserService.getDepartmentById(Integer.valueOf(id)));
         }
-        return "adduser";
+        return "user/adduser";
     }
 
 

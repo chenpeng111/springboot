@@ -8,6 +8,7 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="sex" jdbcType="TINYINT" property="sex" />
     <result column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
   </resultMap>
 
   <resultMap id="UserResultMap" type="com.cpown.demo.dto.SysUserDto">

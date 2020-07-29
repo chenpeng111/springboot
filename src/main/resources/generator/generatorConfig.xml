@@ -35,7 +35,7 @@
                              type="XMLMAPPER"/>
 
 
-        <table tableName="department"></table>
+        <table tableName="t_role"></table>
 
     </context>
 </generatorConfiguration>

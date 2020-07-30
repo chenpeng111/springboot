@@ -45,6 +45,11 @@ public class LoginController {
     public String toLogin(Model model){
         return "index";
     }
+
+    @RequestMapping("/toUnAuthorized")
+    public String toUnAuthorized(Model model){
+        return "error/unauthorized";
+    }
     /**
      * 首页
      * @return

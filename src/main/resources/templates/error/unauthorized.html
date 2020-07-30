@@ -13,32 +13,6 @@
 
 		<!-- Custom styles for this template -->
 		<link th:href="@{/css/dashboard.css} " rel="stylesheet">
-		<style type="text/css">
-			/* Chart.js */
-			
-			@-webkit-keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
-			}
-			
-			@keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
-			}
-			
-			.chartjs-render-monitor {
-				-webkit-animation: chartjs-render-animation 0.001s;
-				animation: chartjs-render-animation 0.001s;
-			}
-		</style>
 	</head>
 
 	<body>
@@ -47,10 +21,10 @@
 
 	<div class="container-fluid">
 			<div class="row">
-				<div th:replace="~{common/common::sideBar(active = 'perm')}"></div>
+				<div th:replace="~{common/common::sideBar(active = 'un')}"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h1>404</h1>
+					<h1>没有权限，请联系管理员</h1>
 				</main>
 			</div>
 		</div>
@@ -70,35 +44,6 @@
 
 		<!-- Graphs -->
 		<script type="text/javascript" src="/js/Chart.min.js" ></script>
-		<script>
-			var ctx = document.getElementById("myChart");
-			var myChart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-					datasets: [{
-						data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-						lineTension: 0,
-						backgroundColor: 'transparent',
-						borderColor: '#007bff',
-						borderWidth: 4,
-						pointBackgroundColor: '#007bff'
-					}]
-				},
-				options: {
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero: false
-							}
-						}]
-					},
-					legend: {
-						display: false,
-					}
-				}
-			});
-		</script>
 
 	</body>
 

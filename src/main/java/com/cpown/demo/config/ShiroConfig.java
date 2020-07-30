@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * ShiroConfig 配置类
  * create by c-pown on 2020-07-28
  */
 @Configuration
@@ -56,20 +57,20 @@ public class ShiroConfig {
          *  perms 拥有对某个资源的权限才能访问
          *  role 拥有某个角色才能访问
          */
-        map.put("user/**", "authc");
-        map.put("department/**", "authc");
-        map.put("role/**", "authc");
-        map.put("perm/**", "authc");
+        map.put("/user/**", "authc");
+        map.put("/department/**", "authc");
+        map.put("/role/**", "authc");
+        map.put("/perm/**", "authc");
         // “/role/**” 开头的用户需要角色认证，是“管理”才允许
-        map.put("/role/**", "roles[管理员]");
+        map.put("/role/**", "roles[管理]");
         // “/perm/**” 开头的用户需要权限认证，是create才允许
         map.put("/perm/**", "perms[create]");
 
         bean.setFilterChainDefinitionMap(map);
+        //登录页
         bean.setLoginUrl("/sys/toLogin");
+        //未授权跳转页
+        bean.setUnauthorizedUrl("/sys/toUnAuthorized");
         return bean;
     }
-
-
-
 }

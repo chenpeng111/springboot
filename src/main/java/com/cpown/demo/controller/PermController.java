@@ -28,7 +28,7 @@ public class PermController {
     private TRoleService tRoleService;
 
     /**
-     * 角色列表
+     * 权限列表
      * @return
      */
     @RequestMapping("/list")
@@ -40,7 +40,7 @@ public class PermController {
 
 
     /**
-     * 跳轉添加角色頁面
+     * 跳轉添加权限頁面
      * @return
      */
     @RequestMapping("/toAdd")
@@ -49,7 +49,7 @@ public class PermController {
         return "perm/addPerm";
     }
     /**
-     * 跳轉修改角色頁面
+     * 跳轉修改权限頁面
      * @return
      */
     @RequestMapping("/toUpdate")
@@ -59,7 +59,7 @@ public class PermController {
         return "perm/addPerm";
     }
     /**
-     * 保存角色
+     * 保存权限
      * @param permission
      * @return
      */
@@ -80,7 +80,7 @@ public class PermController {
     }
 
     /**
-     * 删除用户
+     * 删除权限
      * @return
      */
     @RequestMapping("/delete")

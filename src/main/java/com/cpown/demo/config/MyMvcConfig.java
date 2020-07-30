@@ -14,15 +14,15 @@ public class MyMvcConfig implements WebMvcConfigurer {
      * 配置转发器
      * @param registry
      */
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        //可以将制定路径转发到别的页面    /  默认转发到 index页面
-//        registry.addViewController("/").setViewName("index");
-//        //index.html  默认也转发到 index页面
-//        registry.addViewController("/index.html").setViewName("index");
-//        registry.addViewController("/main.html").setViewName("dashboard");
-//
-//    }
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        //可以将制定路径转发到别的页面    /  默认转发到 index页面
+        registry.addViewController("/").setViewName("index");
+        //index.html  默认也转发到 index页面
+        registry.addViewController("/index.html").setViewName("index");
+        registry.addViewController("/main.html").setViewName("dashboard");
+
+    }
 //
 //    /**
 //     * 自定义拦截器

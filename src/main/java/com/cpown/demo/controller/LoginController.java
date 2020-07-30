@@ -15,19 +15,26 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 用户登录controller
- *
  */
 @Controller
 @RequestMapping("/sys")
 @Slf4j
 public class LoginController {
 
+    /**
+     * 登录用户
+     * @param username
+     * @param password
+     * @param model
+     * @return
+     */
     @RequestMapping("/login")
     public String login(@RequestParam("userName")String username, @RequestParam("password") String password, Model model){
         log.info("用户登录：username={}",username);
         //获取到 Subject 对象
         Subject subject = SecurityUtils.getSubject();
         //将当前 登录用户 放进Subject
+        //这里的 UsernamePasswordToken 在MyRealm认证里面会用到
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             subject.getSession().setAttribute("user",new SysUser(username,password));
@@ -41,11 +48,33 @@ public class LoginController {
         }
         return "dashboard";
     }
+
+    /**
+     * 跳转登录页面
+     * @param model
+     * @return
+     */
     @RequestMapping("/toLogin")
     public String toLogin(Model model){
         return "index";
     }
 
+    /**
+     * 退出当前用户
+     * @param model
+     * @return
+     */
+    @RequestMapping("/loginout")
+    public String loginout(Model model){
+        SecurityUtils.getSubject().logout();
+        return "index";
+    }
+
+    /**
+     * 认证失败页面
+     * @param model
+     * @return
+     */
     @RequestMapping("/toUnAuthorized")
     public String toUnAuthorized(Model model){
         return "error/unauthorized";
@@ -58,6 +87,5 @@ public class LoginController {
     public ModelAndView toDashBoard(){
         return  new ModelAndView("dashboard");
     }
-
 
 }

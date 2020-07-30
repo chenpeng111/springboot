@@ -1,5 +1,6 @@
 package com.cpown.demo.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -72,5 +73,10 @@ public class ShiroConfig {
         //未授权跳转页
         bean.setUnauthorizedUrl("/sys/toUnAuthorized");
         return bean;
+    }
+
+    @Bean(name = "shiroDialect")
+    public ShiroDialect shiroDialect(){
+        return new ShiroDialect();
     }
 }

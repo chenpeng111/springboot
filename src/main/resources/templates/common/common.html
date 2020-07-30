@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"    xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -41,8 +41,9 @@
                         部門管理
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a th:class="${active == 'list' ? 'nav-link active' : 'nav-link'}" th:href="@{/user/list}">
+                    <a  th:class="${active == 'list' ? 'nav-link active' : 'nav-link'}" th:href="@{/user/list}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                             <circle cx="9" cy="7" r="4"></circle>
@@ -53,7 +54,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a th:class="${active == 'role' ? 'nav-link active' : 'nav-link'}" th:href="@{/role/list}">
+                    <a shiro:hasPermission="create" th:class="${active == 'role' ? 'nav-link active' : 'nav-link'}" th:href="@{/role/list}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                             <circle cx="9" cy="7" r="4"></circle>
@@ -64,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a th:class="${active == 'perm' ? 'nav-link active' : 'nav-link'}" th:href="@{/perm/list}">
+                    <a shiro:hasRole="管理" th:class="${active == 'perm' ? 'nav-link active' : 'nav-link'}" th:href="@{/perm/list}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                             <circle cx="9" cy="7" r="4"></circle>
